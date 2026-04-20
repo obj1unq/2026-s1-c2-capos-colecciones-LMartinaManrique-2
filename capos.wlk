@@ -2,6 +2,15 @@ object rolando {
  const inventario = []
  const historial = []
  var capacidad = 2
+ var hogar = castillo
+
+method hogar(){
+    return hogar
+}
+
+method hogar(_hogar){
+    hogar = _hogar
+}
 
 method inventario(){
     return inventario
@@ -19,7 +28,7 @@ method capacidad(_capacidad){
     capacidad = _capacidad
 }
 method artefactosTotalesAdquiridos(){
-    return self.inventario() + castillo.inventario()
+    return self.inventario() + hogar.inventario()
 }
 
 method tieneArtefactoEnPosesiones(artefacto){
@@ -40,8 +49,8 @@ method encontrarArtefacto(artefacto){
     }
 }
 
-method volverAlCastillo(){
-    castillo.depositarObjetos()
+method volverAlHogar(){
+    hogar.depositarObjetos()
     inventario.clear()
 }
 }

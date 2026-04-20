@@ -1,14 +1,10 @@
 object rolando {
  const inventario = []
- const castillo = []
+ const historial = []
  var capacidad = 2
 
 method inventario(){
     return inventario
-}
-
-method castillo(){
-    return castillo
 }
 
 method mochila(){
@@ -19,26 +15,47 @@ method capacidad(){
     return capacidad
 }
 
-method puedeAgregarObjeto(){
-    return self.capacidad()
+method capacidad(_capacidad){
+    capacidad = _capacidad
+}
+method artefactosTotalesAdquiridos(){
+    return self.inventario() + castillo.inventario()
 }
 
-method encontrarObjeto(objeto){
-    if(self.puedeAgregarObjeto()){
-    inventario.add(objeto)}
-else{
-    self.error("mochila llena :c")
+method tieneArtefactoEnPosesiones(artefacto){
+    return self.artefactosTotalesAdquiridos().contains(artefacto)
 }
 
 
+
+
+method puedeAgregarObjeto(artefacto){
+    return self.mochila() < self.capacidad() && not self.tieneArtefactoEnPosesiones(artefacto)
+}
+
+method encontrarArtefacto(artefacto){
+    historial.add(artefacto)
+    if(self.puedeAgregarObjeto(artefacto)){
+        inventario.add(artefacto)
+    }
 }
 
 method volverAlCastillo(){
-    castillo.addAll(inventario)
+    castillo.depositarObjetos()
     inventario.clear()
 }
 }
 
+object castillo{
+    const inventario = []
+
+method inventario() {
+  return inventario
+}
+    method depositarObjetos() {
+      inventario.addAll(rolando.inventario())
+    }
+}
 object espadaDelDestino{
  
 }

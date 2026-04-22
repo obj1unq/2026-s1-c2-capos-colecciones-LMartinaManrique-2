@@ -1,9 +1,19 @@
+import artefactos.*
 object rolando {
  const inventario = []
  const historial = []
  var capacidad = 2
  var hogar = castillo
+ var property poderBase = 5
 
+
+method poderDePelea(){
+    return self.poderBase() + self.poderDeArtefactos()
+}
+
+method poderDeArtefactos(){
+    return inventario.sum({artefacto => artefacto.poder()})
+}
 method hogar(){
     return hogar
 }
@@ -36,8 +46,6 @@ method tieneArtefactoEnPosesiones(artefacto){
 }
 
 
-
-
 method puedeAgregarObjeto(artefacto){
     return self.mochila() < self.capacidad() && not self.tieneArtefactoEnPosesiones(artefacto)
 }
@@ -46,12 +54,18 @@ method encontrarArtefacto(artefacto){
     historial.add(artefacto)
     if(self.puedeAgregarObjeto(artefacto)){
         inventario.add(artefacto)
+        artefacto.personaje(self)
     }
 }
 
 method volverAlHogar(){
     hogar.depositarObjetos()
     inventario.clear()
+}
+
+method pelearBatalla(){
+    inventario.forEach({artefacto => artefacto.usar()})
+    poderBase = poderBase + 1
 }
 }
 
@@ -64,19 +78,4 @@ method inventario() {
     method depositarObjetos() {
       inventario.addAll(rolando.inventario())
     }
-}
-object espadaDelDestino{
- 
-}
-
-object libroDeHechizos{
-
-}
-
-object collarDivino{
-
-}
-
-object armaduraDeAceroValyrio{
-
 }

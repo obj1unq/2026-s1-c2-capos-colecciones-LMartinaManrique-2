@@ -1,5 +1,5 @@
 import capos.*
-
+import moradas.*
 object espadaDelDestino{
     var usos = 0
     var property personaje = rolando
@@ -30,12 +30,13 @@ object libroDeHechizos{
     
     method poder(){
         return if(not hechizos.isEmpty()){
-         hechizos.first().poder()
+         hechizos.first().poder(personaje)
          }else{
             0
          }
             
     }
+    
     method usar(){
         if( not hechizos.isEmpty()){
             hechizos.remove(hechizos.first())
@@ -52,16 +53,23 @@ object libroDeHechizos{
 
 object bendicion {
   const poder = 4
-  method poder(){
+  method poder(personaje){
     return poder
   }
 }
 
 object invisivilidad{
-    method poder(){
+    method poder(personaje){
         return libroDeHechizos.personaje().poder()
     }
 }
+
+object invocacion{
+    method poder(personaje){
+        personaje.artefactoMasPoderosoDeSuMorada()
+    }
+}
+
 object collarDivino{
   var usos = 0
   var property personaje = rolando

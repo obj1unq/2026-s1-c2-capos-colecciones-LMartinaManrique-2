@@ -1,7 +1,10 @@
 import artefactos.*
+import moradas.*
+import enemigos.*
 object rolando {
  const inventario = []
  const historial = []
+ const enemigos = #{caterina, archibaldo, astra}
  var capacidad = 2
  var hogar = castillo
  var property poderBase = 5
@@ -63,19 +66,37 @@ method volverAlHogar(){
     inventario.clear()
 }
 
+method artefactoMasPoderosoDeSuMorada(){
+    return hogar.artefactoMasPoderoso()
+}
+
 method pelearBatalla(){
     inventario.forEach({artefacto => artefacto.usar()})
     poderBase = poderBase + 1
 }
+
+method puedeVencer(enemigo){
+    return self.poderDePelea() > enemigo.poder()
+}
+method enemigosQuePuedeVencer(){
+       return enemigos.filter({enemigo => self.puedeVencer(enemigo)})
 }
 
-object castillo{
-    const inventario = []
+method moradasQuePuedeConquistar(){
+    return self.enemigosQuePuedeVencer().map({e => e.hogar()})
+}
 
-method inventario() {
-  return inventario
+method esPoderoso(){
+    enemigos.all({enemigo => self.puedeVencer(enemigo)})
 }
-    method depositarObjetos() {
-      inventario.addAll(rolando.inventario())
-    }
+
+method esArtefactoFatal(artefacto,enemigo){
+    return artefacto.poder() > enemigo.poder()
 }
+
+method tieneArtefactoFatal(artefacto){
+    inventario.any({artefacto => })
+}
+
+}
+

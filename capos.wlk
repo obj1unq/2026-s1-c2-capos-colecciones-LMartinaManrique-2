@@ -81,7 +81,7 @@ method esArtefactoFatal(artefacto,enemigo){
     return artefacto.poder() > enemigo.poder()
 }
 
-method tieneArtefactoFatal(artefacto, enemigo){
+method tieneArtefactoFatal(enemigo){
     inventario.any({artefacto => self.esArtefactoFatal(artefacto, enemigo) })
 }
 

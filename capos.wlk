@@ -1,13 +1,13 @@
 import artefactos.*
 import moradas.*
-import enemigos.*
+import erethia.*
 object rolando {
  const inventario = []
  const historial = []
- const enemigos = #{caterina, archibaldo, astra}
- var capacidad = 2
- var hogar = castillo
+ var property capacidad = 2
+ var property hogar = castillo
  var property poderBase = 5
+ var property reino = erethia
 
 
 method poderDePelea(){
@@ -16,13 +16,6 @@ method poderDePelea(){
 
 method poderDeArtefactos(){
     return inventario.sum({artefacto => artefacto.poder()})
-}
-method hogar(){
-    return hogar
-}
-
-method hogar(_hogar){
-    hogar = _hogar
 }
 
 method inventario(){
@@ -33,13 +26,6 @@ method mochila(){
     return inventario.size()
 }
 
-method capacidad(){
-    return capacidad
-}
-
-method capacidad(_capacidad){
-    capacidad = _capacidad
-}
 method artefactosTotalesAdquiridos(){
     return self.inventario() + hogar.inventario()
 }
@@ -78,8 +64,9 @@ method pelearBatalla(){
 method puedeVencer(enemigo){
     return self.poderDePelea() > enemigo.poder()
 }
+
 method enemigosQuePuedeVencer(){
-       return enemigos.filter({enemigo => self.puedeVencer(enemigo)})
+       return reino.enemigos().filter({enemigo => self.puedeVencer(enemigo)})
 }
 
 method moradasQuePuedeConquistar(){
@@ -87,15 +74,15 @@ method moradasQuePuedeConquistar(){
 }
 
 method esPoderoso(){
-    enemigos.all({enemigo => self.puedeVencer(enemigo)})
+    reino.enemigos().all({enemigo => self.puedeVencer(enemigo)})
 }
 
 method esArtefactoFatal(artefacto,enemigo){
     return artefacto.poder() > enemigo.poder()
 }
 
-method tieneArtefactoFatal(artefacto){
-    inventario.any({artefacto => })
+method tieneArtefactoFatal(artefacto, enemigo){
+    inventario.any({artefacto => self.esArtefactoFatal(artefacto, enemigo) })
 }
 
 }

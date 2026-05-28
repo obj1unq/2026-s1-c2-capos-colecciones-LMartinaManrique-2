@@ -58,15 +58,15 @@ object bendicion {
   }
 }
 
-object invisivilidad{
-    method poder(personaje){
+object invisibilidad{
+    method poderBase(personaje){
         return libroDeHechizos.personaje().poder()
     }
 }
 
 object invocacion{
     method poder(personaje){
-        personaje.artefactoMasPoderosoDeSuMorada()
+        personaje.poderDeArtefactoMasPoderosoDeSuMorada()
     }
 }
 

@@ -52,7 +52,7 @@ method volverAlHogar(){
     inventario.clear()
 }
 
-method artefactoMasPoderosoDeSuMorada(){
+method poderDeArtefactoMasPoderosoDeSuMorada(){
     return hogar.artefactoMasPoderoso()
 }
 
@@ -74,7 +74,7 @@ method moradasQuePuedeConquistar(){
 }
 
 method esPoderoso(){
-    reino.enemigos().all({enemigo => self.puedeVencer(enemigo)})
+    return reino.enemigos().all({enemigo => self.puedeVencer(enemigo)})
 }
 
 method esArtefactoFatal(artefacto,enemigo){

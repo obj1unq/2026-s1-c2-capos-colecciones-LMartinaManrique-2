@@ -4,7 +4,7 @@ import artefactos.*
 object castillo{
     const inventario = []
 
-    method artefactoMasPoderoso(){
+    method poderDeArtefactoMasPoderoso(){
         return inventario.maxIfEmpty({artefacto => artefacto.poder()},{0})
     }
     
